@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import SearchBar from './Components/SearchBar/SearchBar'
 import { Grid } from '@material-ui/core';
