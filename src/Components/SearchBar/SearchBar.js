@@ -14,11 +14,7 @@ function SearchBar() {
 
     return (
         <Grid container>
-<<<<<<< HEAD
-            <TextField placeholder="Search Song by Artist Name" fullWidth margin="normal" variant="outlined"></TextField>
-=======
             <TextField placeholder="Search Song/Artist Name" fullWidth margin="normal" variant="outlined" onChange={(e)=>{handleSearch(e)}}></TextField>
->>>>>>> db34646f16fbe5173e7bec195404c52411bf7e7c
         </Grid>
     )
 }
