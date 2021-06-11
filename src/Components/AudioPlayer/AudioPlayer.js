@@ -88,6 +88,10 @@ function AudioPlayer({music}) {
             setCurrTime(audioElement.current.currentTime);
     })
 });
+
+// const res = await getAudioLink.get('/song', {
+//   params: { id: data },
+// });
 const PrettoSlider = withStyles({
   root: {
     color: '#52af77',
@@ -118,35 +122,48 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
     return (
-      <Grid container directiob="row" justify="space-between" alignItems="center" style={{padding:'10px'}}>
-        <Grid container direction ="row" justify="space-between" alignItems="center">
-        <span>{formatTime(currTime)}</span>
+      <Grid container directiob="column" justify="space-between" alignItems="center" style={{padding:'10px'}}>
+        <Grid container direction ="row" justify="center" alignContent="center" alignItems="normal">
+                <Grid item xs={2}><span>{formatTime(currTime)}</span></Grid>
+                <Grid item xs={9}>
                 {
                     !isNaN(seekTime) &&
-                    <Slider defaultValue={20} style={{width:'90vw',color:"black"}} 
+                    <Slider defaultValue={20} style={{width:'90%',color:"black"}} 
                             className={"playback-completed"}
                             value={seekTime} onChange={handleSeekChange}/>
                 }
-                <span>{formatTime(duration)}</span>
+                </Grid>
+                <Grid item xs={1}><span>{formatTime(duration)}</span></Grid>
+        </Grid>
+        <Grid container justify="space-between" alignItems='center'>
+          <Grid item>
+            <img src='https://music.youtube.com/img/GPM_to_YTM.gif' altsrc='' width='50px'></img>
+          </Grid>
+          <Grid item>
+            <Grid container direction="row" justify="center" spacing={3} alignItems="center"> 
+              <IconButton style={{height:'50px',width:'50px'}} color="inherit" onClick={OnClickPreviousAudioHandler}>
+                <SkipPreviousIcon style={{height:'30px',width:'30px'}}/>
+              </IconButton>
+
+              <audio ref={audioElement} src={music1} preload={"metadata"}/>
+
+              <IconButton color="inherit" onClick={OnClickPlayAudioHandler}>
+                {(!isPlaying)?<PlayCircleOn style={{height:'60px',width:'60px'}}/>:<PlayCircleOff style={{height:'60px',width:'60px'}}/>}
+              </IconButton>
+
+              <IconButton  style={{height:'50px',width:'50px'}}color="inherit" onClick={OnClickNextAudioHandler}> 
+                <SkipNextIcon style={{height:'30px',width:'30px'}}/>
+              </IconButton>
             </Grid>
-        <Grid item container direction="row" justify="center" spacing={3} alignItems="center" spacing={3}> 
-            <IconButton style={{height:'50px',width:'50px'}} color="inherit" onClick={OnClickPreviousAudioHandler}>
-              <SkipPreviousIcon style={{height:'30px',width:'30px'}}/>
-            </IconButton>
-
-            <audio ref={audioElement} src={music1} preload={"metadata"}/>
-
-            <IconButton color="inherit" onClick={OnClickPlayAudioHandler}>
-              {(!isPlaying)?<PlayCircleOn style={{height:'60px',width:'60px'}}/>:<PlayCircleOff style={{height:'60px',width:'60px'}}/>}
-            </IconButton>
-
-            <IconButton  style={{height:'50px',width:'50px'}}color="inherit" onClick={OnClickNextAudioHandler}> 
-              <SkipNextIcon style={{height:'30px',width:'30px'}}/>
-            </IconButton>
-            <Slider style={{width:'125px'}} color="inherit" value={volume} onChange={handleVolumeChange}/>
-            <IconButton color="inherit" onClick={handleVolume}>{(!isVolumeClicked)?<VolumeUpIcon />:<VolumeOffIcon/>}</IconButton>
+          </Grid>
+          <Grid item>
+            <Grid container direction="row" justify="center" spacing={3} alignItems="center">
+                <Slider style={{width:'125px'}} color="inherit" value={volume} onChange={handleVolumeChange}/>
+                <IconButton color="inherit" onClick={handleVolume}>{(!isVolumeClicked)?<VolumeUpIcon />:<VolumeOffIcon/>}</IconButton>
+            </Grid>  
+          </Grid>
         </Grid>
-        </Grid>
+      </Grid>
     )
 }
 
