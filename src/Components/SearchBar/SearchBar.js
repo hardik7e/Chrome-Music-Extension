@@ -1,17 +1,24 @@
 import React, { useState } from 'react'
 import {Grid, TextField} from '@material-ui/core'
-import {getMusic} from './../../Api/Api'
+import {getMusic} from './../../apis/Search'
 
 function SearchBar() {
 
     const [search,setSearch] = useState("")
-    const [searchResult,setSearchResult] = useState([])
+    const [videosId,setVideosId] = useState([])
 
-    const handleSearch = (e) => {
-        setSearch(e.target.value)
-        // console.log(search)
-        getMusic({text:search})
-        .then(res=>setSearchResult(res.hints))
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        getMusic({text:search,count:10,type:'video'})
+        .then(res=> {
+            // console.log(res.data.items);
+            const searchResult = res.data.items;
+            setVideosId([]);
+            searchResult.forEach(element => {
+                videosId.push(element.id.videoId);
+            });
+            console.log(videosId);
+        })
         .catch(err=>console.log(err))
 
         // console.log(searchResult)
@@ -19,7 +26,11 @@ function SearchBar() {
 
     return (
         <Grid container>
-            <TextField placeholder="Search Song by Artist Name" fullWidth margin="normal" variant="outlined"></TextField>
+            <form  onSubmit={handleSubmit} >
+            <TextField placeholder="Search Song by Artist Name" fullWidth margin="normal" variant="outlined" onInput={e => setSearch(e.target.value)}></TextField>
+            <input type="submit" value="Submit" />
+            </form>
+            
         </Grid>
     )
 }
