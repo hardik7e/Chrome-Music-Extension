@@ -1,6 +1,9 @@
 import axios from "axios"
-const API_KEY = 'AIzaSyDfAzpsHpLnA0KNThw94u025Yj3dVVsPYM';
+import dotenv from "dotenv"
+dotenv.config();
 
+const API_KEY = process.env.YT_api;
+// Youtube Search API
 export const getMusic = (props) =>{
     const options = {
         method: 'GET',
@@ -15,6 +18,7 @@ export const getMusic = (props) =>{
         }
         
     };
+    console.log(API_KEY)
     return axios.request(options)
 };
 
