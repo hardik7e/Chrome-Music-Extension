@@ -18,7 +18,6 @@ export const getMusic = (props) =>{
         }
         
     };
-    console.log(API_KEY)
     return axios.request(options)
 };
 
