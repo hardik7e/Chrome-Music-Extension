@@ -1,8 +1,9 @@
 import axios from "axios"
 import dotenv from "dotenv"
 dotenv.config();
+// const API_KEY = 'AIzaSyDfAzpsHpLnA0KNThw94u025Yj3dVVsPYM';
 
-const API_KEY = process.env.YT_api;
+const API_KEY = process.env.REACT_APP_YT_KEY;
 // Youtube Search API
 export const getMusic = (props) =>{
     const options = {
