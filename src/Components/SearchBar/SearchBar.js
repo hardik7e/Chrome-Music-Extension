@@ -67,8 +67,8 @@ function SearchBar(props) {
     return (
         <Grid container>
             <Paper component="form" className={classes.root} onSubmit={handleSubmit}>
-                <InputBase className={classes.input} placeholder="Search Song by Artist Name" fullWidth margin="normal" variant="outlined" onInput={e => setSearch(e.target.value)} />
-                <IconButton className={classes.iconButton} type="submit" aria-label="search">
+                <InputBase className={classes.input} placeholder="Search Song by Artist Name" fullWidth margin="normal" variant="outlined" onInput={e => setSearch(e.target.value)} autoFocus/>
+                <IconButton  className={classes.iconButton} type="submit" aria-label="search">
                     <SearchIcon />
                 </IconButton>
             </Paper>
