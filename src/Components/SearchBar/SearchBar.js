@@ -5,12 +5,10 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
-import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
-import FolderIcon from '@material-ui/icons/Folder';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -66,18 +64,17 @@ function SearchBar(props) {
             </ListItem>
     )})
 
-    
-        return (
-            <Grid container>
-                <Paper component="form" className={classes.root} onSubmit={handleSubmit}>
-                    <InputBase className={classes.input} placeholder="Search Song by Artist Name" fullWidth margin="normal" variant="outlined" onInput={e => setSearch(e.target.value)} />
-                    <IconButton className={classes.iconButton} type="submit" aria-label="search">
-                        <SearchIcon />
-                    </IconButton>
-                </Paper>
-                {(isOpen)?<Grid>{searchResultsMapped}</Grid>:''}
-            </Grid>
-        )
+    return (
+        <Grid container>
+            <Paper component="form" className={classes.root} onSubmit={handleSubmit}>
+                <InputBase className={classes.input} placeholder="Search Song by Artist Name" fullWidth margin="normal" variant="outlined" onInput={e => setSearch(e.target.value)} />
+                <IconButton className={classes.iconButton} type="submit" aria-label="search">
+                    <SearchIcon />
+                </IconButton>
+            </Paper>
+            {(isOpen)?<Grid>{searchResultsMapped}</Grid>:''}
+        </Grid>
+    )
 }
 
 export default SearchBar
