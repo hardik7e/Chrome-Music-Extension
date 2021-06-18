@@ -4,7 +4,6 @@ import { Grid } from '@material-ui/core';
 import Playlist from './Components/Playlist/Playlist'
 import AudioPlayer from './Components/AudioPlayer/AudioPlayer'
 
-
 function App() {
   return (
     <div style={{minWidth:'500px',minHeight:'500px',flexGrow:'1'}}>
