@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Grid, makeStyles, TextField } from '@material-ui/core'
 import _ from 'lodash';
-import { getMusic } from './../../apis/Search'
+import { getMusic, getPlaylistItems } from './../../apis/Search'
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
@@ -13,13 +13,15 @@ import Avatar from '@material-ui/core/Avatar';
 import genre from '../../Assets/playlist_reducer';
 import { List } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import { FixedSizeList } from 'react-window';
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        margin: '10px',
         padding: '2px 4px',
         display: 'flex',
         alignItems: 'center',
-        width: '94.5vw',
+        width: '90vw',
         backgroundColor: theme.palette.background.paper,
     },
     input: {
@@ -40,6 +42,7 @@ function SearchBar(props) {
     const [isOpen, setisOpen] = useState(false)
     const [searchResult, setSearchResult] = useState(props.data.musicList)
     const [resetSearch, setresetSearch] = useState(false);
+    const [songSelected, setsongSelected] = useState("");
 
     // handle Search Bar
     const handleSubmit = (e) => {
@@ -78,19 +81,17 @@ function SearchBar(props) {
             </ListItem>
     )})
 
-    // Render Selected Playlist
-    const playlist_mapped = _.map(playlist_selected.playlists,(val)=>{
-        return(
-            <ListItem >
-                <ListItemText primary={val.playlistTitle}/>
-            </ListItem>
-        )
-    })
+    // on click function for playlist
+    const handlePlaylistSelect = (e)=>{
+        setsongSelected(_.find(playlist_selected.playlists,{'playlistTitle':e.target.innerText}));
+        console.log(songSelected);
+        // getPlaylistItems({id:})
+    }
 
     // on Click function for Genre
     const handleGenreSelect = (e)=>{
         setPleaylist_selected(_.find(genre,{'genreTitle':e.target.innerText}));
-        console.log(playlist_selected);
+        console.log("selected Playlist :",playlist_selected);
         setIsPlayelistSelected(true);
     }
 
@@ -100,6 +101,15 @@ function SearchBar(props) {
         setresetSearch(true);
     }
 
+    // Render Selected Playlist
+    const playlist_mapped = _.map(playlist_selected.playlists,(val)=>{
+        return(
+            <ListItem onClick={(e)=>handlePlaylistSelect(e)}>
+                <ListItemText primary={val.playlistTitle}/>
+            </ListItem>
+        )
+    })
+
     // Render All Genre
     const genre_mapped = _.map(genre,(val)=>{
         return(
@@ -108,6 +118,15 @@ function SearchBar(props) {
             </ListItem>
         )
     })
+
+    // Render Songs of a selected playlist
+    // const songs_mapped = _.map(songSelected,(val)=>{
+    //     return(
+    //         <ListItem>
+    //             <ListItemText primary={}/>
+    //         </ListItem>
+    //     )
+    // })
 
     return (
         <Grid container>
@@ -120,7 +139,10 @@ function SearchBar(props) {
                     <ArrowBackIosIcon onClick={e=>closePlaylist(e)}/>
                 </IconButton>
             </Paper>
-            {(isOpen)?<Grid>{searchResultsMapped}</Grid>:(isPlaylistSelected)?<List>{playlist_mapped}</List>:<List>{genre_mapped}</List>}
+            {(isOpen)?
+            <Paper style={{maxHeight: 300,margin:10, overflow: 'auto'}}>
+                {searchResultsMapped}
+            </Paper>:(isPlaylistSelected)?<List>{playlist_mapped}</List>:<List>{genre_mapped}</List>}
         </Grid>
     )
 }
