@@ -5,7 +5,6 @@ import Playlist from './Components/Playlist/Playlist'
 import AudioPlayer from './Components/AudioPlayer/AudioPlayer'
 import react, {useState} from 'react'
 
-
 function App() {
   const data = {
     musicList:[],
