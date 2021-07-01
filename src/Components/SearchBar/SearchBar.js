@@ -13,6 +13,7 @@ import Avatar from '@material-ui/core/Avatar';
 import genre from '../../Assets/playlist_reducer';
 import { List } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import GenreList from '../../GenreList/GenreList';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -120,7 +121,8 @@ function SearchBar(props) {
                     <ArrowBackIosIcon onClick={e=>closePlaylist(e)}/>
                 </IconButton>
             </Paper>
-            {(isOpen)?<Grid>{searchResultsMapped}</Grid>:(isPlaylistSelected)?<List>{playlist_mapped}</List>:<List>{genre_mapped}</List>}
+            {/* {(isOpen)?<Grid>{searchResultsMapped}</Grid>:(isPlaylistSelected)?<List>{playlist_mapped}</List>:<Grid item style={{position:'relative', left:'0px', top:'3px'}}><GenreList /></Grid>} */}
+            {(isOpen)?<Grid>{searchResultsMapped}</Grid>:(isPlaylistSelected)?<List>{playlist_mapped}</List>:<Grid item style={{position:'relative', left:'0px', top:'3px'}}><GenreList /></Grid>}
         </Grid>
     )
 }
