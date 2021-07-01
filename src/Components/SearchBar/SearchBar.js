@@ -14,12 +14,13 @@ import genre from '../../Assets/playlist_reducer';
 import { List } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import GenreList from '../../GenreList/GenreList';
-import { FixedSizeList } from 'react-window';
+import TitlebarGridList from '../../GenreList/Grid2';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
         margin: '10px',
-        padding: '2px 4px',
+        padding: '2px 4px 0px 4px',
         display: 'flex',
         alignItems: 'center',
         width: '90vw',
@@ -145,7 +146,8 @@ function SearchBar(props) {
             {(isOpen)?
             <Paper style={{maxHeight: 300,margin:10, overflow: 'auto'}}>
                 {searchResultsMapped}
-            </Paper>:(isPlaylistSelected)?<List>{playlist_mapped}</List>:<List>{genre_mapped}</List>}
+            {/* </Paper>:(isPlaylistSelected)?<List>{playlist_mapped}</List>:<List><GenreList /></List>} */}
+            </Paper>:(isPlaylistSelected)?<List>{playlist_mapped}</List>:<List><TitlebarGridList /></List>}
         </Grid>
     )
 }

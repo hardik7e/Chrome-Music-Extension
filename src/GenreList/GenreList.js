@@ -6,8 +6,12 @@ import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
-import genre_data from '../Assets/playlist_reducer';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import _ from 'lodash';
+
+import genre_data from '../Assets/playlist_reducer';
+
 
 
 
@@ -20,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-around',
     overflow: 'hidden',
     backgroundColor: theme.palette.background.paper,
+    flexGrow:1,
   },
   
   gridList: {
@@ -35,13 +40,23 @@ const useStyles = makeStyles((theme) => ({
     background:
       'linear-gradient(to top, rgba(0,0.2,0,0.7) 0%, rgba(0,0,0.7,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
-  listSubHeaderRoot: {
-    backgroundColor: 'white',
-    color: 'black',
-    fontSize: '15px',
+  // listSubHeaderRoot: {
+  //   backgroundColor: 'white',
+  //   color: 'black',
+  //   fontSize: '15px',
     
-    /* To change the font, use the fontFamily rule */
+  //   /* To change the font, use the fontFamily rule */
+  // },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'left',
+    color: theme.palette.text.primary.dark,
+    backgroundColor: '#29465b',
+    height: '30%',
+    fontWeight: 'bold',
+    fontSize:'1rem',
   },
+  
 }));
 
 
@@ -54,11 +69,17 @@ export default function GenreList() {
     <div className={classes.root}>
 
       {/* TITLE OF THE GRIDLIST */}
-      <GridList cellHeight={180} className={classes.gridList}>
+      {/* <GridList cellHeight={180} className={classes.gridList}>
         <GridListTile key="Subheader" cols={2} style={{ height: 'auto'}}>
           <ListSubheader component="div" classes={{root:classes.listSubHeaderRoot}}>Explore Genre List</ListSubheader>
         </GridListTile>
-      </GridList>
+      </GridList> */}
+      
+      <Grid container spacing={6} >
+        <Grid item xs={12}>
+          <Paper className={classes.paper} >Explore GenreList</Paper>
+        </Grid>
+      </Grid>
 
       {/* BODY OF THE GRIDLIST ////genres/thumbs/ */}
       <GridList className={classes.gridList} cols={6.5}>

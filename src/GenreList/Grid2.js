@@ -3,9 +3,16 @@ import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
+import ListSubheader from '@material-ui/core/ListSubheader';
 import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
+import InfoIcon from '@material-ui/icons/Info';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import image from './image.jpg'
+import _ from 'lodash';
+
+import genre_data from '../Assets/playlist_reducer';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -15,64 +22,42 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   gridList: {
-    width: 500,
-    height: 350,
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: 'translateZ(0)',
-  },
-  titleBar: {
-    background:
-      'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, ' +
-      'rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+    justifyContent : 'space-between'
   },
   icon: {
-    color: 'white',
+    color: 'rgba(255, 255, 255, 0.54)',
   },
+  divtag:{
+    margin: '0px',
+    padding:'0px 10px',
+    width:'100%',
+    height:50,
+  },
+  
+  
 }));
 
-
  
-  const tileData = [
-    {
-      img: image,
-      title: 'Image',
-      author: 'author',
-      featured: true,
-    },
-    {
-        img: image,
-        title: 'Image',
-        author: 'author',
-        featured: false,
-      },
-      {
-        img: image,
-        title: 'Image',
-        author: 'author',
-        featured: false,
-      },
-    
-  ];
- 
-export default function AdvancedGridList() {
+export default function TitlebarGridList() {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <GridList cellHeight={200}  spacing={1} className={classes.gridList}>
-        {tileData.map((tile) => (
-          <GridListTile key={tile.img} xs={4}>
-            <img src={tile.img} alt={tile.title} />
+
+      <div className={classes.divtag}><h3>Explore GenreList</h3></div>
+
+      <GridList cellHeight={80} spacing={30}  cols={3}  >
+        
+        {_.map(genre_data,(val) => (
+          <GridListTile key={val.genreTitle}  >
+            <img src={`/images/genres/thumbs/${val.genreSlug}.png`} alt={val.genreTitle} />
             <GridListTileBar
-              title={tile.title}
-              titlePosition="top"
+              title={val.genreTitle}
               actionIcon={
-                <IconButton aria-label={`star ${tile.title}`} className={classes.icon}>
-                  <StarBorderIcon />
+                <IconButton aria-label={`info about ${val.genreTitle}`} className={classes.icon}>
+                  <InfoIcon />
                 </IconButton>
               }
-              actionPosition="left"
-              className={classes.titleBar}
             />
           </GridListTile>
         ))}

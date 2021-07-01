@@ -6,6 +6,10 @@ const genre_data =
             genreSlug: 'charts',
             playlists: [
               {
+                playlistId:'PLExp_ne8nzRFrD64Z2DD1MN7U7nNTVQXd',
+                playlistTitle: 'We Like It Here - Snarky Puppy',
+              },
+              {
                 playlistId:'PLgzTt0k8mXzEk586ze4BjvDXR7c-TUSnx',
                 playlistTitle: 'Spotify Global Top 50'
               },
@@ -406,18 +410,18 @@ const genre_data =
           },
   
           // Not on Spotify
-          {
-            genreTitle: 'Not on Spotify',
-            genreSlug: 'notonspotify',
-            playlists: [
-              {
-                playlistId:'PLExp_ne8nzRFrD64Z2DD1MN7U7nNTVQXd',
-                playlistTitle: 'We Like It Here - Snarky Puppy',
-                thumbnail: 'welikeithere-snarky-puppy.jpg',
-                background: 'welikeithere-snarky-puppy-bg.jpg'
-              },
-            ]
-          },
+          // {
+          //   genreTitle: 'Not on Spotify',
+          //   genreSlug: 'notonspotify',
+          //   playlists: [
+          //     {
+          //       playlistId:'PLExp_ne8nzRFrD64Z2DD1MN7U7nNTVQXd',
+          //       playlistTitle: 'We Like It Here - Snarky Puppy',
+          //       thumbnail: 'welikeithere-snarky-puppy.jpg',
+          //       background: 'welikeithere-snarky-puppy-bg.jpg'
+          //     },
+          //   ]
+          // },
   
       ];
 
