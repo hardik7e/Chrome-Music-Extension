@@ -20,7 +20,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    margin:10
+    margin:10,
   },
   details: {
     display: 'flex',
