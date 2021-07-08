@@ -36,6 +36,19 @@ export const getPlaylistItems = (props) =>{
         }
     }
     return axios.request(options);
-}
+};
 
+// YT to mp3 converter
+export const convertsongMP3 = (props)=>{
+    const options = {
+        method: 'GET',
+  url: 'https://youtube-mp36.p.rapidapi.com/dl',
+  params: {id: props.id},
+  headers: {
+    'x-rapidapi-key': '6f4564d26fmsh5e051f2d70a23cfp116ffdjsn37837cd3f9e5',
+    'x-rapidapi-host': 'youtube-mp36.p.rapidapi.com'
+  }
+      };
+    return axios.request(options);
+};
 

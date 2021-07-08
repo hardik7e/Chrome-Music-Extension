@@ -48,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   //   /* To change the font, use the fontFamily rule */
   // },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
     textAlign: 'left',
     color: theme.palette.text.primary.dark,
     backgroundColor: '#29465b',
@@ -75,11 +75,11 @@ export default function GenreList() {
         </GridListTile>
       </GridList> */}
       
-      <Grid container spacing={6} >
+      {/* <Grid container spacing={6} >
         <Grid item xs={12}>
           <Paper className={classes.paper} >Explore GenreList</Paper>
         </Grid>
-      </Grid>
+      </Grid> */}
 
       {/* BODY OF THE GRIDLIST ////genres/thumbs/ */}
       <GridList className={classes.gridList} cols={6.5}>

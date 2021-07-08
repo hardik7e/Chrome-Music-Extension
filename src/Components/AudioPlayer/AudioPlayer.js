@@ -15,15 +15,16 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import { convertsongMP3 } from '../../apis/Search';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    margin:10
+    paddingTop:10
   },
   details: {
     display: 'flex',
+    height: 180,
     width:325,
     flexDirection: 'column',
   },
@@ -45,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AudioPlayer({ music }) {
+function AudioPlayer(props) {
   const classes = useStyles();
   const theme = useTheme();
   // const [{id, name, author_name, img, musicName}, setCurrTrack] = useState(music);
@@ -58,6 +59,7 @@ function AudioPlayer({ music }) {
   const [seekTime, setSeekTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currTime, setCurrTime] = useState(0);
+  const [songurl, setSongurl] = useState("")
   const [bannerToggle, setBannerToggle] = useState(false);
   const pointer = { cursor: "pointer" };
   const OnClickPlayAudioHandler = () => {
@@ -96,6 +98,15 @@ function AudioPlayer({ music }) {
     };
   })
 
+
+  // to set songurl
+  useEffect(()=>{
+      if(props.song!=0){
+      convertsongMP3({id:props.song.id.videoId})
+      .then(res=>{setSongurl(res.data.link)})
+      .catch(err=>console.log("error in converting video to mp3: ",err))}
+  },[isPlaying])
+
   const handleVolume = () => {
     setVolumeClicked(!isVolumeClicked)
   }
@@ -133,11 +144,11 @@ function AudioPlayer({ music }) {
       <div className={classes.details}>
         <CardContent className={classes.content}>
           <Typography component="h5" variant="h5">
-            Live From Space
+            {(props.song==="")?"No Song Selected":props.song.snippet.title.substr(0,21)}
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
+          {/* <Typography variant="subtitle1" color="textSecondary">
             Mac Miller
-          </Typography>
+          </Typography> */}
         </CardContent>
         <Grid container direction="row" justify="center" alignContent="center" alignItems="normal">
           <Grid item xs={2}><Paper style={{backgroundColor:'#bebebe', textAlign:'center'}}>{formatTime(currTime)}</Paper></Grid>
@@ -155,7 +166,10 @@ function AudioPlayer({ music }) {
           <IconButton aria-label="previous" onClick={OnClickPreviousAudioHandler}>
             {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
           </IconButton>
-          <audio ref={audioElement} src={music1} preload={"metadata"} />
+
+          // song data
+          <audio ref={audioElement} src={(songurl==0)?'':songurl} preload={"metadata"} />
+
           <IconButton aria-label="play/pause" onClick={OnClickPlayAudioHandler}>
             {(!isPlaying) ? <PlayCircleOn className={classes.playIcon} /> : <PlayCircleOff className={classes.playIcon} />}
           </IconButton>
@@ -170,7 +184,7 @@ function AudioPlayer({ music }) {
       </div>
       <CardMedia
         className={classes.cover}
-        image='https://material-ui.com/static/images/cards/live-from-space.jpg'
+        image={(props.song==0)?'https://material-ui.com/static/images/cards/live-from-space.jpg':props.song.snippet.thumbnails.high.url}
         title="Live from space album cover"
       />
     </Card>

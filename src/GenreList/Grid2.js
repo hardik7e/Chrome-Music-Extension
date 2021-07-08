@@ -44,7 +44,7 @@ export default function TitlebarGridList() {
   return (
     <div className={classes.root}>
 
-      <div className={classes.divtag}><h3>Explore GenreList</h3></div>
+      {/* <div className={classes.divtag}><h3>Explore GenreList</h3></div> */}
 
       <GridList cellHeight={80} spacing={30}  cols={3}  >
         

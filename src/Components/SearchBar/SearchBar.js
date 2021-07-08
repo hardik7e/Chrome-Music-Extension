@@ -13,8 +13,8 @@ import Avatar from '@material-ui/core/Avatar';
 import genre from '../../Assets/playlist_reducer';
 import { List } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import GenreList from '../../GenreList/GenreList';
 import TitlebarGridList from '../../GenreList/Grid2';
+import AudioPlayer from '../AudioPlayer/AudioPlayer';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -45,6 +45,7 @@ function SearchBar(props) {
     const [searchResult, setSearchResult] = useState(props.data.musicList)
     const [resetSearch, setresetSearch] = useState(false);
     const [songSelected, setsongSelected] = useState("");
+    const [song,setSong] = useState("");
 
     // handle Search Bar
     const handleSubmit = (e) => {
@@ -71,7 +72,7 @@ function SearchBar(props) {
     // Rednder All search elements
     const searchResultsMapped = searchResult.map((value) => {
        return ( 
-            <ListItem>
+            <ListItem onClick={e=>setSong(value)}>
                 <ListItemAvatar>
                     <Avatar>
                         <img src={value.snippet.thumbnails.default.url} altsrc="" />
@@ -148,6 +149,7 @@ function SearchBar(props) {
                 {searchResultsMapped}
             {/* </Paper>:(isPlaylistSelected)?<List>{playlist_mapped}</List>:<List><GenreList /></List>} */}
             </Paper>:(isPlaylistSelected)?<List>{playlist_mapped}</List>:<List><TitlebarGridList /></List>}
+            <Grid item xs={12}><AudioPlayer song={song}/></Grid>
         </Grid>
     )
 }

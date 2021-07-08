@@ -37,19 +37,6 @@ function Playlist(props) {
     return (
         <div className={classes.demo}>
             <List dense={dense}>
-              {/* {generate(
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <FolderIcon/>
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="Single-line item"
-                    secondary={secondary ? `${props.artist}` : null}
-                  />
-                </ListItem>,
-              )} */}
               {
                 props.data.musicList.map((value)=>(
                   <ListItem>
