@@ -46,6 +46,8 @@ function SearchBar(props) {
     const [resetSearch, setresetSearch] = useState(false);
     const [songSelected, setsongSelected] = useState("");
     const [song,setSong] = useState("");
+    
+    
 
     // handle Search Bar
     const handleSubmit = (e) => {
@@ -64,7 +66,7 @@ function SearchBar(props) {
                 console.log(searchResult);
                 console.log("genre list :",genre);
             })
-            .catch(err => console.x))
+            .catch(err => console.log(err))
         :setisOpen(false);
         setresetSearch(false);
     }
