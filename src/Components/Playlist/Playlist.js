@@ -52,29 +52,6 @@ export default function PlayListMapped(props) {
   
   
     return (
-<<<<<<< HEAD
-        <div className={classes.demo}>
-            <List dense={dense}>
-              {
-                props.data.musicList.map((value)=>(
-                  <ListItem>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <FolderIcon/>
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                      primary={value.snippet.title}
-                      secondary={secondary ? `${value.snippet.artist}` : null}
-                    />
-                  </ListItem>
-                ))
-              }
-            </List>
-          </div>
-    )
-}
-=======
       <div className={classes.root}>
   
         <div className={classes.divtag}>
@@ -82,7 +59,6 @@ export default function PlayListMapped(props) {
             onClick={props.ClosePlaylist}>
             <ArrowBackIcon />
           </IconButton> 
->>>>>>> 1f5134c1b3d704d7944360ba4f8bb02d137d2b93
 
           <div>{props.SelectedPlayList.genreTitle}</div>
         </div>

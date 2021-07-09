@@ -8,7 +8,6 @@ import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import image from './image.jpg'
 import _ from 'lodash';
 
 import genre_data from '../Assets/playlist_reducer';

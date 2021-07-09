@@ -16,6 +16,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import TitlebarGridList from '../../GenreList/Grid2';
 import AudioPlayer from '../AudioPlayer/AudioPlayer';
 import GenreList from '../GenreList/GenreList';
+import { convertsongMP3 } from '../../apis/Search';
 
 
 
@@ -46,6 +47,7 @@ function SearchBar(props) {
     const [resetSearch, setresetSearch] = useState(false);
     const [songSelected, setsongSelected] = useState("");
     const [song,setSong] = useState("");
+    const [songurl, setSongurl] = useState("");
     
     
 
@@ -71,10 +73,17 @@ function SearchBar(props) {
         setresetSearch(false);
     }
 
+    // Handle Song url function
+    const handleSongUrl = (value) =>{
+        convertsongMP3({id:value.id.videoId})
+      .then(res=>{setSongurl(res.data.link)})
+      .catch(err=>console.log("error in converting video to mp3: ",err))
+    }
+
     // Rednder All search elements
     const searchResultsMapped = searchResult.map((value) => {
        return ( 
-            <ListItem onClick={e=>setSong(value)}>
+            <ListItem onClick={()=>{setSong(value);handleSongUrl(value);}}>
                 <ListItemAvatar>
                     <Avatar>
                         <img src={value.snippet.thumbnails.default.url} altsrc="" />
@@ -105,8 +114,9 @@ function SearchBar(props) {
             
             
             {(isOpen)?
-                <Paper style={{maxHeight: 300,margin:10, overflow: 'auto'}}>{searchResultsMapped}</Paper>
+                <Paper style={{maxHeight: 300,width:'100%',margin:10, overflow: 'auto'}}>{searchResultsMapped}</Paper>
                 :<Grid item style={{position:'relative', left:'0px', top:'3px'}}><GenreList /></Grid>}
+            <Grid item style={{position:'absolute', left:'0px', bottom:'0px'}}><AudioPlayer song={song} songurl={songurl}/></Grid>
 
         </Grid>
     )

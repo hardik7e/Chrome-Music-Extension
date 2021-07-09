@@ -20,11 +20,9 @@ import { convertsongMP3 } from '../../apis/Search';
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    paddingTop:10
   },
   details: {
     display: 'flex',
-    height: 180,
     width:325,
     flexDirection: 'column',
   },
@@ -59,7 +57,6 @@ function AudioPlayer(props) {
   const [seekTime, setSeekTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [currTime, setCurrTime] = useState(0);
-  const [songurl, setSongurl] = useState("")
   const [bannerToggle, setBannerToggle] = useState(false);
   const pointer = { cursor: "pointer" };
   const OnClickPlayAudioHandler = () => {
@@ -100,12 +97,12 @@ function AudioPlayer(props) {
 
 
   // to set songurl
-  useEffect(()=>{
-      if(props.song!=0){
-      convertsongMP3({id:props.song.id.videoId})
-      .then(res=>{setSongurl(res.data.link)})
-      .catch(err=>console.log("error in converting video to mp3: ",err))}
-  },[isPlaying])
+  // useEffect(()=>{
+  //     if(props.song!=0){
+  //     convertsongMP3({id:props.song.id.videoId})
+  //     .then(res=>{setSongurl(res.data.link)})
+  //     .catch(err=>console.log("error in converting video to mp3: ",err))}
+  // },[isPlaying])
 
   const handleVolume = () => {
     setVolumeClicked(!isVolumeClicked)
@@ -143,8 +140,8 @@ function AudioPlayer(props) {
     <Card className={classes.root}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
-          <Typography component="h5" variant="h5">
-            {(props.song==="")?"No Song Selected":props.song.snippet.title.substr(0,21)}
+          <Typography component="h5" variant="h5" style={{fontSize:'15px'}}>
+            {(props.song==="")?"No Song Selected":props.song.snippet.title}
           </Typography>
           {/* <Typography variant="subtitle1" color="textSecondary">
             Mac Miller
@@ -167,8 +164,7 @@ function AudioPlayer(props) {
             {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
           </IconButton>
 
-          // song data
-          <audio ref={audioElement} src={(songurl==0)?'':songurl} preload={"metadata"} />
+          <audio ref={audioElement} src={(props.songurl==0)?'':props.songurl} preload={"metadata"} />
 
           <IconButton aria-label="play/pause" onClick={OnClickPlayAudioHandler}>
             {(!isPlaying) ? <PlayCircleOn className={classes.playIcon} /> : <PlayCircleOff className={classes.playIcon} />}
