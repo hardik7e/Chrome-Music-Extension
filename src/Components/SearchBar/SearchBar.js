@@ -62,7 +62,9 @@ function SearchBar(props) {
                 console.log(searchResult);
                 console.log("genre list :",genre);
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                alert("Check your network connection!")
+                console.log(err)})
         :setisOpen(false);
         setresetSearch(false);
     }
