@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
  
-export default function TitlebarGridList() {
+export default function TitlebarGridList(props) {
   const classes = useStyles();
 
   const [playlist_selected,setPleaylist_selected] = useState("");
@@ -60,7 +60,7 @@ const closePlaylist = (e)=>{
     
       <div>
         {(isPlaylistSelected)?
-        <PlayListMapped SelectedPlayList={playlist_selected} ClosePlaylist={closePlaylist}/>
+        <PlayListMapped SelectedPlayList={playlist_selected} ClosePlaylist={closePlaylist} handlePlaylistItem={props.handlePlaylistItem}/>
         :
         <div className={classes.root}>
           <div  className={classes.divtag}><h3>Explore GenreList</h3></div>
