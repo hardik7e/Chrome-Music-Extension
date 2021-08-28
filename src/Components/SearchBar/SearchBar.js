@@ -11,9 +11,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import genre from '../../Assets/playlist_reducer';
-import { List } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-import TitlebarGridList from '../../GenreList/Grid2';
 import AudioPlayer from '../AudioPlayer/AudioPlayer';
 import GenreList from '../GenreList/GenreList';
 import { convertsongMP3 } from '../../apis/Search';
@@ -49,7 +47,21 @@ function SearchBar(props) {
     const [song,setSong] = useState("");
     const [songurl, setSongurl] = useState("");
     
-    
+    const handlePlaylistItem = (playlistId) => {
+        console.log(playlistId);
+        getPlaylistItems({id:playlistId,count:8}).then(res =>{
+          const data = res.data.items;
+          const arr = []
+          data.forEach(element => {
+            arr.push(element);
+          });
+          setSearchResult(arr);
+          setisOpen(true);
+        })
+        .catch(err => {
+          alert("Check your network connection!")
+          console.log(err)})
+      }
 
     // handle Search Bar
     const handleSubmit = (e) => {
@@ -65,17 +77,24 @@ function SearchBar(props) {
                 });
                 setSearchResult(arr);
                 setisOpen(true)
-                console.log(searchResult);
-                console.log("genre list :",genre);
+                // console.log(arr);
+                // console.log("genre list :",genre);
             })
-            .catch(err => console.log(err))
+            .catch(err => {
+                alert("Check your network connection!")
+                console.log(err)})
         :setisOpen(false);
         setresetSearch(false);
     }
 
     // Handle Song url function
     const handleSongUrl = (value) =>{
-        convertsongMP3({id:value.id.videoId})
+        let videoId = value.id.videoId;
+        if(videoId === undefined){
+            videoId = value.snippet.resourceId.videoId;
+        }
+        console.log(videoId);
+        convertsongMP3({id:videoId})
       .then(res=>{setSongurl(res.data.link)})
       .catch(err=>console.log("error in converting video to mp3: ",err))
     }
@@ -83,14 +102,15 @@ function SearchBar(props) {
     // Rednder All search elements
     const searchResultsMapped = searchResult.map((value) => {
        return ( 
-            <ListItem onClick={()=>{setSong(value);handleSongUrl(value);}}>
-                <ListItemAvatar>
+            <ListItem onClick={()=>{setSong(value);handleSongUrl(value);}} >
+                <ListItemAvatar style={{cursor: 'pointer'}}>
                     <Avatar>
                         <img src={value.snippet.thumbnails.default.url} altsrc="" />
                     </Avatar>
                 </ListItemAvatar>
                 <ListItemText
                     primary={value.snippet.title}
+                    style={{cursor: 'pointer'}}
                 />
             </ListItem>
     )})
@@ -115,7 +135,7 @@ function SearchBar(props) {
             
             {(isOpen)?
                 <Paper style={{maxHeight: 300,width:'100%',margin:10, overflow: 'auto'}}>{searchResultsMapped}</Paper>
-                :<Grid item style={{position:'relative', left:'0px', top:'3px'}}><GenreList /></Grid>}
+                :<Grid item style={{position:'relative', left:'0px', top:'3px'}}><GenreList handlePlaylistItem={handlePlaylistItem}/></Grid>}
             <Grid item style={{position:'absolute', left:'0px', bottom:'0px'}}><AudioPlayer song={song} songurl={songurl}/></Grid>
 
         </Grid>

@@ -5,7 +5,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 
 import IconButton from '@material-ui/core/IconButton';
-
+import { getMusic, getPlaylistItems } from './../../apis/Search';
 
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
@@ -47,10 +47,7 @@ const useStyles = makeStyles((theme) => ({
  
 export default function PlayListMapped(props) {
   const classes = useStyles();
-
-  
-  
-  
+    
     return (
       <div className={classes.root}>
   
@@ -64,15 +61,19 @@ export default function PlayListMapped(props) {
         </div>
         
         <GridList cellHeight={72} spacing={15}  cols={3} className={classes.gridList}  >
-          
-          {_.map(props.SelectedPlayList.playlists,(val) => (
-            <GridListTile key={val.playlistTitle}  >
-              <img src={image} alt={val.playlistTitle} />
-              <GridListTileBar 
-                title={val.playlistTitle}
-              />
-            </GridListTile>
-          ))}
+          {
+            props.SelectedPlayList.playlists.map(val => {
+              // cons ole.log(val.playlistId,":",val.playlistTitle);
+              return (
+                <GridListTile key={val.playlistId} onClick={()=>{props.handlePlaylistItem(val.playlistId)}}>
+                  <img src={image} alt={val.playlistTitle} />
+                  <GridListTileBar 
+                    title={val.playlistTitle}
+                  />
+                </GridListTile>
+              )
+            })
+          }
         </GridList>
       </div>
     )

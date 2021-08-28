@@ -6,8 +6,8 @@ const genre_data =
             genreSlug: 'charts',
             playlists: [
               {
-                playlistId:'PLExp_ne8nzRFrD64Z2DD1MN7U7nNTVQXd',
-                playlistTitle: 'We Like It Here - Snarky Puppy',
+                playlistId:'RDCLAK5uy_kuo_NioExeUmw07dFf8BzQ64DFFTlgE7Q',
+                playlistTitle: 'Punjabi Fire',
               },
               {
                 playlistId:'PLgzTt0k8mXzEk586ze4BjvDXR7c-TUSnx',
