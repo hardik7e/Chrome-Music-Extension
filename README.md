@@ -11,11 +11,13 @@ npm install
 ```
 
 ## To Build app to Chrome Extension
-
+The below command win run a custom build.sh bash file that will generate a dist folder
 ```bash
-   build.sh
+   npm run build
 ```
-
+## Installation of Extention on Chrome
+* Go to chrome://extensions/ and check the box for Developer mode in the top right
+* Click the Load unpacked extension button and select the dist folder that was just created
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
